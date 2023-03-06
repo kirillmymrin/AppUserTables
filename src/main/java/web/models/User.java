@@ -1,7 +1,6 @@
 package web.models;
 
 
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -16,13 +15,13 @@ public class User {
     private Long id;
     @Column(name = "name")
     @NotEmpty(message = "Field must not be empty!.Enter your name! ")
-    @Size(min = 2,max = 50, message = "Range from 2 to 50 characters")
+    @Size(min = 2, max = 50, message = "Range from 2 to 50 characters")
     private String firstName;
 
 
     @Column(name = "last_name")
     @NotEmpty(message = "Field must not be empty!.Enter your lastName! ")
-    @Size(min = 2,max = 50, message = "Range from 2 to 50 characters")
+    @Size(min = 2, max = 50, message = "Range from 2 to 50 characters")
     private String lastName;
 
 

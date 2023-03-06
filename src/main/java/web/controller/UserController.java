@@ -1,6 +1,5 @@
 package web.controller;
 
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -23,34 +22,34 @@ public class UserController {
 
 
     @GetMapping(value = "/")
-    public String getUserTable(ModelMap modelMap) {
-        modelMap.addAttribute("users", userService.getUserList());
-        return "allUser";
+    public String getUsers(ModelMap modelMap) {
+        modelMap.addAttribute("users", userService.getUsers());
+        return "users";
     }
 
     @GetMapping("user/{id}")
-    public String show(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", userService.show(id));
-        return "show";
+    public String getUser(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "userInfo";
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
+    public String getNewForm(Model model) {
         model.addAttribute("user", new User());
         return "newUser";
     }
 
     @PostMapping
-    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String save(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "newUser";
-        userService.saveUser(user);
+        userService.save(user);
         return "redirect:/";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") long id) {
-        model.addAttribute("user", userService.show(id));
+    public String getEditForm(Model model, @PathVariable("id") long id) {
+        model.addAttribute("user", userService.getUser(id));
         return "edit";
     }
 
